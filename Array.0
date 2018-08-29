@@ -1,0 +1,43 @@
+/*
+Capture events into a array of struct logging event date and time
+*/
+ typedef struct capture //this is the record instance
+{
+  int capture_date;
+  int time_of_day;  // figure out how to make time of day an integer var type
+} capture;
+int capture_count;
+capture captureLog; //declare a log of captures. Later to be an array when memory gets allocated
+
+//delcare a pointer variable here
+
+capture *logPtr; //assume pointer must be of the same var type as the variable to which it's pointing
+
+void setup() {
+  int capture_count = 0;  // used to index into captureLog[50]
+  capture captureLog[50]; //array of up to 50 captures (date/time of each capture wraps after 50)
+  logPtr = captureLog;  //set the pointer to the first address of the captureLog
+}
+
+void loop() {
+  // increment capture count 
+  capture_count ++;
+  //record date and time in the captureLog
+  captureLog.capture_date = 3;  //record event date in captureLog eventually use Read_RTC() here
+  captureLog.time_of_day = 1;   //record the time
+  // add call to scrollLog to display the captureLog
+}
+
+//============ function definition =============
+
+void scrollLog(capture *pLog, int size) //input pointer to the log and size of log
+{
+   //local variables
+   int i;
+     for (i = 0; i < size; i++)
+   {
+   *++pLog; 
+   // scroll display for each log entry TBD
+   delay(700);    
+   } // end for loop
+} // end of function scrollLog
